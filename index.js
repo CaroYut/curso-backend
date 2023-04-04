@@ -1,33 +1,33 @@
 class productManager {
-    static last_id = 0;
-    constructor (){
-    this.productos = [];
+    constructor() {
+        this.productos = [];
+        this.productoContadorId = 1;
     }
 
-    addProduct = (title,description,price,thumbnail,code,stock) => {
-        productManager.last_id ++
-        const arrayProductos = {
-            title : "Lemon pie",
-            description : "tarta de limon y merengue",
-            price : $1000,
-            thumbnail : "sin imagen",
-            code : 01,
-            stock : 10,
-            id : productManager.last_id
-            }
-        this.productos.push(arrayProductos)
-    }
-    
-    getProductos () {
-     console.log(arrayProductos)
-     }       
-                
-    getProductById () {
-    if (arrayProductos.includes(id)) {
-    console.log("El producto con su id se encuentra")
-    } else {
-    console.log("Not Found")
-    }
-    
-    }
+    addProduct = (title, description, price, thumbnail, code, stock) => {
+        const buscarProducto = this.productos.find((producto) => producto.code === code);
+        buscarProducto
+            ? console.log("El producto con ese codigo ya existe!") : !title || !description || !price || !thumbnail || !code || !stock
+                ? console.log("Llenar campos")
+                : this.productos.push({
+                    title,
+                    description,
+                    price,
+                    thumbnail,
+                    code,
+                    stock,
+                    id: this.productoContadorId++,
+                });
+    };
+
+    getProductos = () => this.productos;
+
+    getProductById = (id) => {
+        const productoId = this.productos.find((productoId) => productoId.id === id);
+        console.log(productoId ? productoId : "Not found");
+    };
 }
+
+const productos = new productManager();
+productos.addProduct('producto1','es un producto',$10,'sin foto','10',5);
+console.log(productos.getProductos());
